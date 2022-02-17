@@ -69,8 +69,8 @@ In order to complete this project, you must fix the following modules:
 
 The three components (Wheel, Quiz, Form) are already connected to the Redux store.
 The action types, action creators and reducers provided are sufficient to achieve MVP without adding new ones.
-You are welcome to build your own reducers, action types and creators from scratch, as long as functionality is achieved and all tests pass.
-The async action creators required are marked as such.
+You are welcome to build your own reducers, action types and creators from scratch, as long as all tests pass.
+The async action creators are marked as such.
 
 ## MVP Short Explanation
 
