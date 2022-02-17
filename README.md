@@ -1,4 +1,4 @@
-# Sprint Challenge: Advanced React
+# Sprint Challenge: Advanced State Management
 
 In this challenge, you will write the logic for [THIS APP](https://advanced-state-wheel.herokuapp.com/).
 
