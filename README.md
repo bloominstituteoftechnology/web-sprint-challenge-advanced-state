@@ -23,7 +23,7 @@ In this challenge, you will write the logic for [THIS APP](https://advanced-stat
 Open the live prototype linked above and study its functionality using the following **Chrome Dev Tools**:
 
 - **Elements tab** shows the exact DOM rendered as we interact with the UI. Look at texts but also at class names.
-- **Network tab** shows the HTTP messages. "Payload" shows the request payload from the client (if any) and "Preview" shows the payload from the server.
+- **Network tab** shows the HTTP messages. "Payload" shows the request payload from the client (if any) and "Preview" shows the response payload from the server.
 - **Redux Extension tab** shows application state, as well as the actions that fire on user interaction. These actions commonly carry payloads but not always.
 
 ### Things "Product" consider noteworthy
