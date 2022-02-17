@@ -6,10 +6,10 @@ In this challenge, you will write the logic for [THIS APP](https://advanced-stat
 
 - Node 16.x
 - NPM 8.x (update NPM executing `npm i -g npm`)
-- Postman (download [here](https://www.postman.com/downloads/))
-- Chrome >= 96.x
+- Unix-like shell (Gitbash/bash/zsh)
+- Chrome >= 98.x
 
-Other browser/Node/NPM configurations might work but haven't been tested.
+Other configurations might work but haven't been tested.
 
 ## Project Setup
 
@@ -32,7 +32,7 @@ Open the live prototype linked above and study its functionality using the follo
 
 ## The API
 
-The endpoints needed for this project are the following. Explore them with Postman before starting work.
+The endpoints needed for this project are the following. Explore them with [Postman](https://www.postman.com/downloads/)) before starting work:
 
 - `[GET] http://localhost:9000/api/quiz/next`
   - A response to a proper request includes `200 OK` and the next quiz object
