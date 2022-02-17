@@ -68,16 +68,19 @@ In order to complete this project, you must fix the following modules:
 - [Form screen](frontend/components/Form.js)
 
 The three components (Wheel, Quiz, Form) are already connected to the Redux store.
-The action types provided are sufficient to achieve MVP.
+The action types, action creators and reducers provided are sufficient to achieve MVP without adding new ones.
+You are welcome to build your own reducers, action types and creators from scrach, as long as functionality is achieved and all tests pass.
 The async action creators required are marked as such.
 
 ## MVP Short Explanation
+
+❗ ALL TESTS MUST PASS
 
 Make **ALL** the tests pass!
 
 ### Stretch Goals
 
-- Stretch 1
+- Without breaking any tests, see to randomizing the order in which answers appear.
 
 ### Important Notes
 
