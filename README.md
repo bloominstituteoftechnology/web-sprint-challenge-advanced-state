@@ -56,7 +56,7 @@ The endpoints needed for this project are the following:
   - example of payload: `{ "quiz_id": "LVqUh", "answer_id": "0VEv0" }`
   - A response to a proper request includes `200 OK` and feedback on the answer
 
-❗ Test drive all these endpoints with [Postman](https://www.postman.com/downloads/)) before starting with the project.
+❗ Test drive all these endpoints with [Postman](https://www.postman.com/downloads/) before starting with the project.
 
 ## MVP
 
