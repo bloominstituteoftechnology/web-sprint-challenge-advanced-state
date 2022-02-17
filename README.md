@@ -26,14 +26,15 @@ Open the live prototype linked above and study its functionality using the follo
 - **Network tab** shows the HTTP messages. "Payload" shows the request payload from the client (if any) and "Preview" shows the payload from the server.
 - **Redux Extension tab** shows application state, as well as the actions that fire on user interaction. These actions commonly carry payloads but not always.
 
-### Things "Product" believes are important
+### Things "Product" consider noteworthy
 
-- Components don't lose their state by navigating the links back and forth:
+- The routes **don't lose their state** by navigating the links back and forth:
   - Current position of the "B" in the wheel is maintained.
   - The current quiz stays loaded.
   - Values inside the form are kept.
-- The endpoint to fetch the next quiz is rather slow, and a "Loading next quiz" message displays while it arrives.
-- The "Submit answer" button in the quiz stays disabled until an answer is selected.
+- The endpoint to fetch the next quiz is rather slow, and a "Loading next quiz" message displays **while it arrives**.
+- The "Submit answer" button in the quiz stays disabled until **an answer is selected**.
+- The "Submit new quiz" button in the form stays disabled untill **all** inputs have values such that `inputValue.trim().length > 0`.
 
 ## Studying the API
 
