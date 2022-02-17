@@ -63,14 +63,18 @@ In order to complete this project, you must fix the following modules:
 
 - [Combined reducers](frontend/state/reducer.js)
 - [Action creators](frontend/state/action-creators.js)
-- [Wheel screen](frontend/components/Wheel.js)
-- [Quiz screen](frontend/components/Quiz.js)
-- [Form screen](frontend/components/Form.js)
+- [Message component](frontend/components/Message.js)
+- [Wheel component](frontend/components/Wheel.js)
+- [Quiz component](frontend/components/Quiz.js)
+- [Form component](frontend/components/Form.js)
 
-The three components (Wheel, Quiz, Form) are already connected to the Redux store.
-The action types, action creators and reducers provided are sufficient to achieve MVP without adding new ones.
-You are welcome to build your own reducers, action types and creators from scratch, as long as all tests pass.
-The async action creators are marked as such.
+### Notes
+
+- The Form is already connected to the Redux store, you'll have to connect the rest of components.
+- The action types, action creators and reducers provided are sufficient to achieve MVP without adding new ones.
+- You are welcome to build your own reducers, action types and creators from scratch, as long as all tests pass.
+- The async action creators are marked as such.
+- Don't install new npm dependencies or upgrade existing ones.
 
 ## MVP Short Explanation
 
