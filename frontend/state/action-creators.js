@@ -16,24 +16,24 @@ export function resetForm() { }
 // ❗ async action creators
 export function fetchQuiz() {
   return function (dispatch) {
-    // First, reset the quiz state so the "Loading next quiz..." message can display
+    // First, dispatch the resetting of the quiz state (so the "Loading next quiz..." message can display)
     // On successful GET:
-    // - Load the quiz into the quiz state
+    // - Dispatch an action to send the obtained quiz to its state
   }
 }
 export function postAnswer() {
   return function (dispatch) {
     // On successful POST:
-    // - Reset the selected answer state
-    // - Set the message from the server in the appropriate state
+    // - Dispatch an action to reset the selected answer state
+    // - Dispatch an action to set the server message in state
     // - Dispatch the fetching of the next quiz
   }
 }
 export function postQuiz() {
   return function (dispatch) {
     // On successful POST:
-    // - Set a message in state
-    // - Reset the form
+    // - Dispatch the correct message to the the appropriate state
+    // - Dispatch the resetting of the form
   }
 }
-// On promise rejections, use log statements or breakpoints, and put an appropriate erro message in state.
+// On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
