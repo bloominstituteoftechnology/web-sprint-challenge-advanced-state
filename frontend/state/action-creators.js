@@ -1,3 +1,4 @@
+// plain action creators
 export function moveClockwise() { }
 
 export function moveCounterClockwise() { }
@@ -12,7 +13,7 @@ export function inputChange() { }
 
 export function resetForm() { }
 
-// async action creators
+// ❗ async action creators
 export function fetchQuiz() {
   return function (dispatch) { }
 }

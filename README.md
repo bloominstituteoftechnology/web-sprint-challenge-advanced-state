@@ -59,13 +59,17 @@ The endpoints needed for this project are the following:
 
 ## MVP
 
-In order to complete this project, you must edit the following modules:
+In order to complete this project, you must fix the following modules:
 
 - [Combined reducers](frontend/state/reducer.js)
 - [Action creators](frontend/state/action-creators.js)
 - [Wheel screen](frontend/components/Wheel.js)
 - [Quiz screen](frontend/components/Quiz.js)
 - [Form screen](frontend/components/Form.js)
+
+The three components (Wheel, Quiz, Form) are already connected to the Redux store.
+The action types provided are sufficient to achieve MVP.
+The async action creators required are marked as such.
 
 ## MVP Short Explanation
 
