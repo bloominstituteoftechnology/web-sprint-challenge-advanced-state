@@ -61,12 +61,12 @@ The endpoints needed for this project are the following:
 
 In order to complete this project, you must fix the following modules:
 
-- [Combined reducers](frontend/state/reducer.js)
-- [Action creators](frontend/state/action-creators.js)
-- [Message component](frontend/components/Message.js)
-- [Wheel component](frontend/components/Wheel.js)
-- [Quiz component](frontend/components/Quiz.js)
-- [Form component](frontend/components/Form.js)
+- [reducer.js](frontend/state/reducer.js)
+- [action-creators.js](frontend/state/action-creators.js)
+- [Message.js](frontend/components/Message.js)
+- [Wheel.js](frontend/components/Wheel.js)
+- [Quiz.js](frontend/components/Quiz.js)
+- [Form.js](frontend/components/Form.js)
 
 ### Notes
 
