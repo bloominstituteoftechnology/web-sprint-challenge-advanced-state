@@ -209,14 +209,14 @@ describe('[FORM SCREEN]', () => {
       fireEvent.change(newTrueAnswerInput(), { target: { value: '' } })
       fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
       fireEvent.click(submitNewQuizBtn())
-      await screen.findByText('true_answser_text is required', queryOptions, waitForOptions)
+      await screen.findByText('true_answer_text is required', queryOptions, waitForOptions)
       expect(screen.queryByText('question_text is required', queryOptions)).not.toBeInTheDocument()
       // missing false answer
       fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
       fireEvent.change(newFalseAnswerInput(), { target: { value: '' } })
       fireEvent.click(submitNewQuizBtn())
-      await screen.findByText('true_answser_text is required', queryOptions, waitForOptions)
+      await screen.findByText('true_answer_text is required', queryOptions, waitForOptions)
       expect(screen.queryByText('question_text is required', queryOptions)).not.toBeInTheDocument()
     } else {
       expect(submitNewQuizBtn()).toBeDisabled()

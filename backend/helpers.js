@@ -23,18 +23,18 @@ const quizSchema = yup.object().shape({
     .required('question_text is required')
     .min(1, 'question_text must be at least 1 character')
     .max(50, 'question_text cannot exceed 50 characters'),
-  true_answser_text: yup
+  true_answer_text: yup
     .string()
     .trim()
-    .required('true_answser_text is required')
-    .min(1, 'true_answser_text must be at least 1 character')
-    .max(50, 'true_answser_text cannot exceed 50 characters'),
-  false_answser_text: yup
+    .required('true_answer_text is required')
+    .min(1, 'true_answer_text must be at least 1 character')
+    .max(50, 'true_answer_text cannot exceed 50 characters'),
+  false_answer_text: yup
     .string()
     .trim()
-    .required('false_answser_text is required')
-    .min(1, 'false_answser_text must be at least 1 character')
-    .max(50, 'false_answser_text cannot exceed 50 characters'),
+    .required('false_answer_text is required')
+    .min(1, 'false_answer_text must be at least 1 character')
+    .max(50, 'false_answer_text cannot exceed 50 characters'),
 })
 
 const quizzes = [
@@ -102,13 +102,13 @@ async function postAnswer(payload) {
 
 async function postQuiz(payload) {
   try {
-    const { question_text, true_answser_text, false_answser_text } = await quizSchema.validate(payload)
+    const { question_text, true_answer_text, false_answer_text } = await quizSchema.validate(payload)
     const newQuestion = {
       quiz_id: nanoid(5),
       question: question_text,
       answers: [
-        { answer_id: nanoid(5), text: true_answser_text, correct: true },
-        { answer_id: nanoid(5), text: false_answser_text, correct: false },
+        { answer_id: nanoid(5), text: true_answer_text, correct: true },
+        { answer_id: nanoid(5), text: false_answer_text, correct: false },
       ],
     }
     quizzes.push(newQuestion)
