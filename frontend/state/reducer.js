@@ -1,3 +1,4 @@
+// ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
 
 const initialWheelState = 0

@@ -1,4 +1,4 @@
-// plain action creators
+// ❗ You don't need to add extra action creators to achieve MVP
 export function moveClockwise() { }
 
 export function moveCounterClockwise() { }
@@ -36,4 +36,4 @@ export function postQuiz() {
     // - Dispatch the resetting of the form
   }
 }
-// On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
+// ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
