@@ -18,7 +18,7 @@ Other configurations might work but haven't been tested.
 - Visit your app by navigating Chrome to `http://localhost:3000`.
 - Run tests locally executing `npm test`. The local test file is `codegrade_mvp.test.js`.
 
-## Prep
+## Studying the prototype
 
 Open the live prototype linked above and study its functionality using the following **Chrome Dev Tools**:
 
@@ -28,9 +28,14 @@ Open the live prototype linked above and study its functionality using the follo
 
 ### Things "Product" believes are important
 
-- yadda yadda
+- Components don't lose their state by navigating the links back and forth:
+  - Current position of the "B" in the wheel is maintained.
+  - The current quiz stays loaded.
+  - Values inside the form are kept.
+- The endpoint to fetch the next quiz is rather slow, and a "Loading next quiz" message displays while it arrives.
+- The "Submit answer" button in the quiz stays disabled until an answer is selected.
 
-## The API
+## Studying the API
 
 The endpoints needed for this project are the following. Explore them with [Postman](https://www.postman.com/downloads/)) before starting work:
 
