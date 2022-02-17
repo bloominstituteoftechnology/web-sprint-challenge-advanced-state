@@ -9,7 +9,7 @@ In this challenge, you will write the logic for [THIS APP](https://advanced-stat
 - Unix-like shell (Gitbash/bash/zsh)
 - Chrome >= 98.x
 
-Other configurations might work but haven't been tested.
+❗ Other configurations might work but haven't been tested.
 
 ## Project Setup
 
@@ -41,7 +41,7 @@ Open the live prototype linked above and study its functionality using the follo
 
 ## Studying the API
 
-The endpoints needed for this project are the following. **Explore them** with [Postman](https://www.postman.com/downloads/)) before starting work:
+The endpoints needed for this project are the following:
 
 - `[GET] http://localhost:9000/api/quiz/next`
   - A response to a proper request includes `200 OK` and the next quiz object
@@ -55,11 +55,17 @@ The endpoints needed for this project are the following. **Explore them** with [
   - example of payload: `{ "quiz_id": "LVqUh", "answer_id": "0VEv0" }`
   - A response to a proper request includes `200 OK` and feedback on the answer
 
-Test all these endpoints with Postman before starting work with the project.
+❗ Test drive all these endpoints with [Postman](https://www.postman.com/downloads/)) before starting with the project.
 
 ## MVP
 
-Detailed explanation
+In order to complete this project, you must edit the following modules:
+
+- [Combined reducers](frontend/state/reducer.js)
+- [Action creators](frontend/state/action-creators.js)
+- [Wheel screen](frontend/components/Wheel.js)
+- [Quiz screen](frontend/components/Quiz.js)
+- [Form screen](frontend/components/Form.js)
 
 ## MVP Short Explanation
 
