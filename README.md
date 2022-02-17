@@ -37,7 +37,8 @@ Open the live prototype linked above and study its functionality using the follo
 - The "Submit answer" button in the quiz stays disabled until **an answer is selected**.
 - Once an answer is selected, the only way to unselect it is by **selecting the other answer**.
 - The "Submit new quiz" button in the form stays disabled until **all** inputs have values such that `value.trim().length > 0`.
-- Submitting a new quiz successfully **adds it to the roster** of questions that arrive from the `GET /quiz/next` endpoint described below.
+- Submitting a new quiz successfully **adds it to the roster** of questions that cycle through the quiz screen.
+- The structure of the HTML (hierarchy, ids, class names, texts on buttons etc) must match those of the prototype exactly.
 
 ## Studying the API
 
