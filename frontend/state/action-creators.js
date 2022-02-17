@@ -13,7 +13,7 @@ export function inputChange() { }
 
 export function resetForm() { }
 
-// ❗ async action creators
+// ❗ Async action creators
 export function fetchQuiz() {
   return function (dispatch) {
     // First, dispatch the resetting of the quiz state (so the "Loading next quiz..." message can display)
