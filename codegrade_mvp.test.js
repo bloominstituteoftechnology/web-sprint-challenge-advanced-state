@@ -193,7 +193,7 @@ describe('[FORM SCREEN]', () => {
   test(`[11] The submit button is disabled until all inputs have values more than one character
       in length after trimming leading and trailing whitespace
   `, () => {
-    // expect(submitNewQuizBtn()).toBeDisabled()
+    expect(submitNewQuizBtn()).toBeDisabled()
     fireEvent.change(newQuestionInput(), { target: { value: 'question' } })
     expect(submitNewQuizBtn()).toBeDisabled()
     fireEvent.change(newTrueAnswerInput(), { target: { value: 'true' } })
