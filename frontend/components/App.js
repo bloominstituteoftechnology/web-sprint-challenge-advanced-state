@@ -18,7 +18,7 @@ import reducer from '../state/reducer'
 let store
 export const resetStore = () => {
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-  store = createStore(reducer, {}, composeEnhancers(applyMiddleware(thunk)))
+  store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 }
 resetStore()
 
