@@ -26,7 +26,7 @@ Open the live prototype linked above and study its functionality using the follo
 - **Network tab** shows the HTTP messages. "Payload" shows the request payload from the client (if any) and "Preview" shows the response payload from the server.
 - **Redux Extension tab** shows application state, as well as the actions that fire on user interaction. These actions commonly carry payloads but not always.
 
-### Things "Product" consider noteworthy
+### Important notes from "Product"
 
 - The routes **don't lose their state** by navigating the links back and forth:
   - Current position of the "B" in the wheel is maintained.
