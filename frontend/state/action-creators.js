@@ -25,7 +25,7 @@ export function postAnswer() {
   return function (dispatch) {
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
-    // - Dispatch an action to set the server message in state
+    // - Dispatch an action to set the server message to state
     // - Dispatch the fetching of the next quiz
   }
 }
