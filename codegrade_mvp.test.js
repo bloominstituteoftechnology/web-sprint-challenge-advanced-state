@@ -113,7 +113,7 @@ describe('[QUIZ SCREEN]', () => {
   beforeEach(() => {
     fireEvent.click(quizLink())
   })
-  test(`[1] Navigating to the Quiz screen:
+  test(`[3] Navigating to the Quiz screen:
       - Loads the first question & answers asynchronously`, async () => {
     let question = await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
     let answerA = screen.queryByText(AFunction, queryOptions)
@@ -122,12 +122,12 @@ describe('[QUIZ SCREEN]', () => {
     expect(answerA).toBeInTheDocument()
     expect(answerB).toBeInTheDocument()
   })
-  test(`[2] Navigating to the Quiz screen:
+  test(`[4] Navigating to the Quiz screen:
       - The "Submit answer" button should be disabled`, async () => {
     await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
     expect(submitAnswerBtn()).toBeDisabled()
   })
-  test(`[3] Selecting an answer adds the correct class name:
+  test(`[5] Selecting an answer adds the correct class name:
       - Adds the "selected" class name to the selected answer
       - Removes the "selected" class name from the other answer`, async () => {
     await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
@@ -140,7 +140,7 @@ describe('[QUIZ SCREEN]', () => {
     expect(answerA.className).not.toMatch(/selected/)
     expect(answerB.className).toMatch(/selected/)
   })
-  test(`[4] Selecting an answer adds the correct text to its button:
+  test(`[6] Selecting an answer adds the correct text to its button:
       - Changes the label of the button from "Select" to "SELECTED"
       - Turns the label of the unselected from "SELECTED" to "Select"`, async () => {
     await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
@@ -153,7 +153,7 @@ describe('[QUIZ SCREEN]', () => {
     expect(answerA.textContent).not.toMatch(/SELECTED/)
     expect(answerB.textContent).toMatch(/SELECTED/)
   })
-  test(`[5] Selecting and submitting an answer:
+  test(`[7] Selecting and submitting an answer:
       - Loads the next quiz from the API`, async () => {
     await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
     let answerA = screen.queryByText(AFunction, queryOptions)
@@ -161,7 +161,7 @@ describe('[QUIZ SCREEN]', () => {
     fireEvent.click(submitAnswerBtn())
     await screen.findByText(WhatIsPromise, queryOptions, waitForOptions)
   })
-  test(`[6] Selecting and submitting a correct answer:
+  test(`[8] Selecting and submitting a correct answer:
       - Puts the proper success message at the top of the page`, async () => {
     await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
     let answerA = screen.queryByText(AFunction, queryOptions)
@@ -169,7 +169,7 @@ describe('[QUIZ SCREEN]', () => {
     fireEvent.click(submitAnswerBtn())
     await screen.findByText(ThatIsCorrect, queryOptions)
   })
-  test(`[7] Selecting and submitting an incorrect answer:
+  test(`[9] Selecting and submitting an incorrect answer:
       - Submitting puts the proper failure message at the top of the page`, async () => {
     await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
     let answerB = screen.queryByText(AnElephant, queryOptions)
@@ -182,7 +182,7 @@ describe('[FORM SCREEN]', () => {
   beforeEach(() => {
     fireEvent.click(formLink())
   })
-  test('[1] Typing in inputs changes their value', () => {
+  test('[10] Typing in inputs changes their value', () => {
     fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })
     expect(newQuestionInput()).toHaveValue('foo')
     fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
@@ -190,45 +190,26 @@ describe('[FORM SCREEN]', () => {
     fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
     expect(newFalseAnswerInput()).toHaveValue('baz')
   })
-  test(`[2] The submit button is disabled until all inputs have truthy values,
-        OR proper validation errors from the API appear on the screen, on incomplete form submit:
-      - missing question OR
-      - missing true answer OR
-      - missing false answer
-  `, async () => {
-    const isSubmitDisabled = submitNewQuizBtn().disabled
-    if (!isSubmitDisabled) {
-      // missing question
-      fireEvent.change(newQuestionInput(), { target: { value: '' } })
-      fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
-      fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
-      fireEvent.click(submitNewQuizBtn())
-      await screen.findByText('question_text is required', queryOptions, waitForOptions)
-      // missing true answer
-      fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })
-      fireEvent.change(newTrueAnswerInput(), { target: { value: '' } })
-      fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
-      fireEvent.click(submitNewQuizBtn())
-      await screen.findByText('true_answer_text is required', queryOptions, waitForOptions)
-      expect(screen.queryByText('question_text is required', queryOptions)).not.toBeInTheDocument()
-      // missing false answer
-      fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })
-      fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
-      fireEvent.change(newFalseAnswerInput(), { target: { value: '' } })
-      fireEvent.click(submitNewQuizBtn())
-      await screen.findByText('true_answer_text is required', queryOptions, waitForOptions)
-      expect(screen.queryByText('question_text is required', queryOptions)).not.toBeInTheDocument()
-    } else {
-      expect(submitNewQuizBtn()).toBeDisabled()
-      fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })
-      expect(submitNewQuizBtn()).toBeDisabled()
-      fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
-      expect(submitNewQuizBtn()).toBeDisabled()
-      fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
-      expect(submitNewQuizBtn()).toBeEnabled()
-    }
+  test(`[11] The submit button is disabled until all inputs have values more than one character
+      in length after trimming leading and trailing whitespace
+  `, () => {
+    // expect(submitNewQuizBtn()).toBeDisabled()
+    fireEvent.change(newQuestionInput(), { target: { value: 'question' } })
+    expect(submitNewQuizBtn()).toBeDisabled()
+    fireEvent.change(newTrueAnswerInput(), { target: { value: 'true' } })
+    expect(submitNewQuizBtn()).toBeDisabled()
+    fireEvent.change(newFalseAnswerInput(), { target: { value: 'false' } })
+    expect(submitNewQuizBtn()).toBeEnabled()
+    fireEvent.change(newQuestionInput(), { target: { value: '   ' } })
+    expect(submitNewQuizBtn()).toBeDisabled()
+    fireEvent.change(newQuestionInput(), { target: { value: '  question  ' } })
+    expect(submitNewQuizBtn()).toBeEnabled()
+    fireEvent.change(newTrueAnswerInput(), { target: { value: '   ' } })
+    expect(submitNewQuizBtn()).toBeDisabled()
+    fireEvent.change(newTrueAnswerInput(), { target: { value: '  true  ' } })
+    expect(submitNewQuizBtn()).toBeEnabled()
   })
-  test(`[3] Successful submit of new quiz
+  test(`[12] Successful submit of new quiz
       - Displays the correct success message at the top of the screen
       - Empties out the form
   `, async () => {
@@ -241,7 +222,7 @@ describe('[FORM SCREEN]', () => {
     expect(newTrueAnswerInput()).toHaveValue('')
     expect(newFalseAnswerInput()).toHaveValue('')
   })
-  test(`[4] Successful submit of new quiz
+  test(`[13] Successful submit of new quiz
       - Adds the quiz to the roster of quizzes
   `, async () => {
     fireEvent.change(newQuestionInput(), { target: { value: 'foobarbaz?' } })
@@ -268,7 +249,7 @@ describe('[FORM SCREEN]', () => {
   })
 })
 describe('[APP STATE]', () => {
-  test(`[1] The state of the wheel survives route changes:
+  test(`[14] The state of the wheel survives route changes:
       - Moving the wheel, navigating away and back, should keep the position of the "B"
   `, async () => {
     testCogs(0)
@@ -278,7 +259,7 @@ describe('[APP STATE]', () => {
     fireEvent.click(wheelLink())
     testCogs(1)
   })
-  test(`[2] The state of the quiz survives route changes:
+  test(`[15] The state of the quiz survives route changes:
       - Selecting an answer, navigating away and back, should keep the selected answer
       - Navigating away and back shouldn't cause a new quiz to be fetched from the API
   `, async () => {
@@ -293,7 +274,7 @@ describe('[APP STATE]', () => {
     fireEvent.click(answerB.querySelector('button'))
     expect(answerB.textContent).toMatch(/SELECTED/)
   })
-  test(`[3] The state of the form survives route changes
+  test(`[16] The state of the form survives route changes
       - Filling out the form, navigating away and back, the entered data should survive
   `, async () => {
     fireEvent.click(formLink())
