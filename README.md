@@ -76,8 +76,6 @@ The async action creators required are marked as such.
 
 ❗ ALL TESTS MUST PASS
 
-Make **ALL** the tests pass!
-
 ### Stretch Goals
 
 - Without breaking any tests, see to randomizing the order in which answers appear.
