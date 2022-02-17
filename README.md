@@ -36,7 +36,7 @@ Open the live prototype linked above and study its functionality using the follo
 - A next quiz is only requested if there is **no quiz already in app state**, or by submitting an answer.
 - The "Submit answer" button in the quiz stays disabled until **an answer is selected**.
 - Once an answer is selected, the only way to unselect it is by **selecting the other answer**.
-- The "Submit new quiz" button in the form stays disabled untill **all** inputs have values such that `value.trim().length > 0`.
+- The "Submit new quiz" button in the form stays disabled until **all** inputs have values such that `value.trim().length > 0`.
 - Submitting a new quiz successfully **adds it to the roster** of questions that arrive from the `GET /quiz/next` endpoint below.
 
 ## Studying the API
@@ -49,7 +49,7 @@ The endpoints needed for this project are the following:
   - Expects a payload with the following properties: `question_text`, `true_answer_text`, `false_answer_text`
   - Example of payload: `{ "question_text": "Love JS?", "true_answer_text": "yes", "false_answer_text": "nah" }`
   - A response to a proper request includes `201 Created` and the newly created quiz object
-  - A malformed client payload will result in a `422 Unprocessable Entity` reponse with a reason
+  - A malformed client payload will result in a `422 Unprocessable Entity` response with a reason
 - `[POST] http://localhost:9000/api/quiz/answer`
   - expects a payload with the following properties: `quiz_id`, `answer_id`
   - example of payload: `{ "quiz_id": "LVqUh", "answer_id": "0VEv0" }`
@@ -69,7 +69,7 @@ In order to complete this project, you must fix the following modules:
 
 The three components (Wheel, Quiz, Form) are already connected to the Redux store.
 The action types, action creators and reducers provided are sufficient to achieve MVP without adding new ones.
-You are welcome to build your own reducers, action types and creators from scrach, as long as functionality is achieved and all tests pass.
+You are welcome to build your own reducers, action types and creators from scratch, as long as functionality is achieved and all tests pass.
 The async action creators required are marked as such.
 
 ## MVP Short Explanation
