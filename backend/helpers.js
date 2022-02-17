@@ -91,7 +91,7 @@ async function postAnswer(payload) {
     const { quiz_id, answer_id } = await answerSchema.validate(payload)
     const question = quizzes.find(q => q.quiz_id === quiz_id)
     const answer = question?.answers.find(an => an.answer_id === answer_id)
-    if (!question) return [404, { message: `We could not find a question with quiz_id ${quiz_id}` }]
+    if (!question) return [404, { message: `We could not find a quiz with quiz_id ${quiz_id}` }]
     if (!answer) return [404, { message: `We could not find an answer with answer_id ${answer_id}` }]
     if (answer.correct) return [200, { message: 'Nice job! That was the correct answer' }]
     return [200, { message: 'What a shame! That was the incorrect answer' }]

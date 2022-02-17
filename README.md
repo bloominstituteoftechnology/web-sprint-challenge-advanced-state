@@ -30,15 +30,18 @@ Open the live prototype linked above and study its functionality using the follo
 
 - The routes **don't lose their state** by navigating the links back and forth:
   - Current position of the "B" in the wheel is maintained.
-  - The current quiz stays loaded.
+  - Current quiz question stays loaded.
   - Values inside the form are kept.
-- The endpoint to fetch the next quiz is rather slow, and a "Loading next quiz" message displays **while it arrives**.
+- The endpoint to fetch the next quiz is rather slow, and a "Loading next quiz" shows instead of the quiz **while it arrives**.
+- A next quiz is only requested if there is **no quiz already in app state**, or by submitting an answer.
 - The "Submit answer" button in the quiz stays disabled until **an answer is selected**.
-- The "Submit new quiz" button in the form stays disabled untill **all** inputs have values such that `inputValue.trim().length > 0`.
+- Once an answer is selected, the only way to unselect it is by **selecting the other answer**.
+- The "Submit new quiz" button in the form stays disabled untill **all** inputs have values such that `value.trim().length > 0`.
+- Submitting a new quiz successfully **adds it to the roster** of questions that arrive from the `GET /quiz/next` endpoint below.
 
 ## Studying the API
 
-The endpoints needed for this project are the following. Explore them with [Postman](https://www.postman.com/downloads/)) before starting work:
+The endpoints needed for this project are the following. **Explore them** with [Postman](https://www.postman.com/downloads/)) before starting work:
 
 - `[GET] http://localhost:9000/api/quiz/next`
   - A response to a proper request includes `200 OK` and the next quiz object
