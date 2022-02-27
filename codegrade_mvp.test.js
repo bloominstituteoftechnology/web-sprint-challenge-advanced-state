@@ -11,7 +11,6 @@ const queryOptions = { exact: false }
 const renderApp = ui => {
   resetStore()
   window.history.pushState({}, 'Test page', '/')
-  document.body.innerHTML = ''
   return render(ui)
 }
 let server
