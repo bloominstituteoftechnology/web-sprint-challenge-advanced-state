@@ -26,20 +26,18 @@ export default function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <React.StrictMode>
-          <Message />
-          <h1>Advanced State</h1>
-          <nav>
-            <NavLink id="wheelLink" to="/">Wheel</NavLink>
-            <NavLink id="quizLink" to="/quiz">Quiz</NavLink>
-            <NavLink id="formLink" to="/quiz-new">Form</NavLink>
-          </nav>
-          <Routes>
-            <Route path="/" element={<Wheel />} />
-            <Route path="quiz" element={<Quiz />} />
-            <Route path="quiz-new" element={<Form />} />
-          </Routes>
-        </React.StrictMode>
+        <Message />
+        <h1>Advanced State</h1>
+        <nav>
+          <NavLink id="wheelLink" to="/">Wheel</NavLink>
+          <NavLink id="quizLink" to="/quiz">Quiz</NavLink>
+          <NavLink id="formLink" to="/quiz-new">Form</NavLink>
+        </nav>
+        <Routes>
+          <Route path="/" element={<Wheel />} />
+          <Route path="quiz" element={<Quiz />} />
+          <Route path="quiz-new" element={<Form />} />
+        </Routes>
       </BrowserRouter>
     </Provider>
   )
