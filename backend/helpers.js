@@ -1,5 +1,13 @@
 const yup = require('yup')
-const { nanoid } = require("nanoid")
+
+const getId = () => {
+  const chars = 'abcdefghijklmnopqrstuvwxyz'
+  let result = ''
+  for (let i = 0; i < 5; i++) {
+    result += chars[Math.floor(Math.random() * 26)]
+  }
+  return result
+}
 
 const answerSchema = yup.object().shape({
   quiz_id: yup
@@ -39,27 +47,27 @@ const quizSchema = yup.object().shape({
 
 const quizzes = [
   {
-    quiz_id: nanoid(5),
+    quiz_id: getId(),
     question: 'What is a closure?',
     answers: [
-      { answer_id: nanoid(5), text: 'A function plus its bindings', correct: true },
-      { answer_id: nanoid(5), text: 'Clearly some kind of elephant', correct: false },
+      { answer_id: getId(), text: 'A function plus its bindings', correct: true },
+      { answer_id: getId(), text: 'Clearly some kind of elephant', correct: false },
     ],
   },
   {
-    quiz_id: nanoid(5),
+    quiz_id: getId(),
     question: 'What is a promise?',
     answers: [
-      { answer_id: nanoid(5), text: 'A value representing a future result', correct: true },
-      { answer_id: nanoid(5), text: 'Something like a blue teapot', correct: false },
+      { answer_id: getId(), text: 'A value representing a future result', correct: true },
+      { answer_id: getId(), text: 'Something like a blue teapot', correct: false },
     ],
   },
   {
-    quiz_id: nanoid(5),
+    quiz_id: getId(),
     question: 'An ES6 module is a...',
     answers: [
-      { answer_id: nanoid(5), text: 'JS file', correct: true },
-      { answer_id: nanoid(5), text: 'Fruit fly', correct: false },
+      { answer_id: getId(), text: 'JS file', correct: true },
+      { answer_id: getId(), text: 'Fruit fly', correct: false },
     ],
   },
 ]
@@ -104,11 +112,11 @@ async function postQuiz(payload) {
   try {
     const { question_text, true_answer_text, false_answer_text } = await quizSchema.validate(payload)
     const newQuestion = {
-      quiz_id: nanoid(5),
+      quiz_id: getId(),
       question: question_text,
       answers: [
-        { answer_id: nanoid(5), text: true_answer_text, correct: true },
-        { answer_id: nanoid(5), text: false_answer_text, correct: false },
+        { answer_id: getId(), text: true_answer_text, correct: true },
+        { answer_id: getId(), text: false_answer_text, correct: false },
       ],
     }
     quizzes.push(newQuestion)
