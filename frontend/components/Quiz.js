@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { connect } from 'react-redux'
-import { fetchQuiz, selectAnswer } from '../state/action-creators'
+import { fetchQuiz, selectAnswer, postAnswer } from '../state/action-creators'
 
 export function Quiz(props) {
 
@@ -9,6 +9,16 @@ export function Quiz(props) {
       props.fetchQuiz()
     }, [])
 
+  }
+
+  const submit = () => {
+    if(props.selected){
+      const answer = {
+        quiz_id: props.quiz.quiz_id,
+        answer_id: props.selected.answer_id
+      }
+      props.postAnswer(answer)
+    }
   }
    
   return (
@@ -22,17 +32,17 @@ export function Quiz(props) {
             <div id="quizAnswers">
               {props.quiz.answers.map((answer,idx) => {
                 return(
-                  <div className='answer' key={idx}>
+                  <div className={props.selected === answer ? 'answer selected' : 'answer'} key={idx}>
                     {answer.text}
                     <button onClick={() => {props.selectAnswer(answer)}}>
-                      {props.selected === answer? 'SELECTED' : 'select'}
+                      {props.selected === answer ? 'SELECTED' : 'select'}
                     </button>
                   </div>
                 )
               })}
             </div>
 
-            <button id="submitAnswerBtn">Submit answer</button>
+            <button id="submitAnswerBtn" onClick={() => submit()} disabled={props.selected ? false : true}>Submit answer</button>
           </>
         ) :'Loading next quiz...'
       }
@@ -47,4 +57,4 @@ const mapStateToProps = state => {
 
 }
 
-export default connect(mapStateToProps,{fetchQuiz, selectAnswer})(Quiz)
+export default connect(mapStateToProps,{fetchQuiz, selectAnswer, postAnswer})(Quiz)
