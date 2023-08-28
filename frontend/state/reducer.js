@@ -108,7 +108,6 @@ const initialQuizState = {
   quiz: "",
   isFetching: false,
   error: "",
-  selectValue: "Select"
 }
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
@@ -119,7 +118,10 @@ function quiz(state = initialQuizState, action) {
     }
     case SET_QUIZ_INTO_STATE:
       return {...state,
-        quiz: action.payload,
+        quiz: {...action.payload,
+        answers: action.payload.answers.map((element) => {
+          return {...element, selectValue: "Select", answerHighlight: false}
+        })},
       isFetching: true,
       error: ""
       }
@@ -130,7 +132,19 @@ function quiz(state = initialQuizState, action) {
       error: action.payload
     }
     case SET_SELECTED_ANSWER:
-      return {}
+      return {
+        ...state,
+        quiz: {...state.quiz, answers: state.quiz.answers.map(element => {
+          if(action.payload === element.answer_id){
+            return {...element, selectValue: "SELECTED", answerHighlight: true}
+          } else {
+            return {...element, selectValue: "Select", answerHighlight: false}
+          }
+        })},
+        selectValue: state.quiz.answers.selectValue,
+        isFetching: true,
+        error: "",
+      }
     default:
       return state
   }

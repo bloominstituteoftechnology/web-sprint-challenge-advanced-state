@@ -24,7 +24,9 @@ export function moveCounterClockwise() {
  }
 //wheel functionality finished
 
-export function selectAnswer() { }
+export function selectAnswer(id) { 
+  return {type: SET_SELECTED_ANSWER, payload: id}
+}
 
 export function setMessage() { }
 
@@ -42,7 +44,6 @@ export const fetchQuiz = () => dispatch => {
     // - Dispatch an action to send the obtained quiz to its state
     axios.get(`http://localhost:9000/api/quiz/next`)
     .then(res => {
-      console.log(res.data)
       dispatch(setQuizIntoState(res.data))
     }, (error) => {
       dispatch(setError(error.message))

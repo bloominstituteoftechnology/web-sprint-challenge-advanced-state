@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { fetchQuiz } from '../state/action-creators'
+import { fetchQuiz, selectAnswer } from '../state/action-creators'
 function Quiz(props) {
   if (!props.isFetching){
     props.fetchQuiz();
@@ -16,9 +16,9 @@ function Quiz(props) {
             <h2>{props.quiz.question}</h2>
 
             <div id="quizAnswers">
-            {props.quiz.answers.map(answer => {
-              return <div key={answer.text} className="answer">{answer.text}
-              <button>{props.selectValue}</button>
+            {props.quiz.answers.map((answer, ind) => {
+              return <div key={answer.text} className={props.quiz.answers[ind].answerHighlight ? "answer selected" : "answer"}>{answer.text}
+              <button onClick={() => props.selectAnswer(answer.answer_id)}>{props.quiz.answers[ind].selectValue}</button>
               </div>
             })}
             </div>
@@ -36,8 +36,7 @@ const mapStateToProps = state => {
     quiz: state.quiz.quiz,
     isFetching: state.quiz.isFetching,
     error: state.quiz.error,
-    selectValue: state.quiz.selectValue
   }
 }
 
-export default connect(mapStateToProps, { fetchQuiz })(Quiz);
+export default connect(mapStateToProps, { fetchQuiz, selectAnswer })(Quiz);
