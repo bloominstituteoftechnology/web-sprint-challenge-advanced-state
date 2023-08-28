@@ -1,11 +1,13 @@
 import React from 'react'
-
-export default function Quiz(props) {
+import { connect } from 'react-redux'
+import { fetchQuiz } from '../state/action-creators'
+function Quiz(props) {
   return (
     <div id="wrapper">
+
       {
         // quiz already in state? Let's use that, otherwise render "Loading next quiz..."
-        true ? (
+        props.isFetching ? (
           <>
             <h2>What is a closure?</h2>
 
@@ -32,3 +34,13 @@ export default function Quiz(props) {
     </div>
   )
 }
+
+const mapStateToProps = state => {
+  return {
+    quiz: state.quiz.quiz,
+    isFetching: state.quiz.isFetching,
+    error: state.quiz.error
+  }
+}
+
+export default connect(mapStateToProps, { fetchQuiz })(Quiz);

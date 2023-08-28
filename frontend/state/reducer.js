@@ -1,5 +1,6 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
+import axios from 'axios';
 
 import {
   MOVE_CLOCKWISE,
@@ -8,10 +9,12 @@ import {
   SET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
   INPUT_CHANGE,
-  RESET_FORM
+  RESET_FORM,
+  SET_IS_FETCHING,
+  SET_ERROR
 }
   from './action-types'
-
+//wheel functionality done
 const initialWheelState = {
   wheelState:
     [{
@@ -70,48 +73,78 @@ function wheel(state = initialWheelState, action) {
         }),
         activeWheel: currentWheel
       }
-      case MOVE_COUNTERCLOCKWISE:
-        if (currentWheel === 0) {
-          currentWheel = 5
-        } else {
-          currentWheel  -= 1
-        }
-        return {
-          ...state,
-          wheelState: state.wheelState.map(item => {
-            if (currentWheel === item.wheelIndex) {
-              return {
-                ...item,
-                cogState: "cog active",
-                wheelValue: "B"
-              }
-            } else {
-              return {
-                ...item,
-                cogState: "cog",
-                wheelValue: ""
-              }
+    case MOVE_COUNTERCLOCKWISE:
+      if (currentWheel === 0) {
+        currentWheel = 5
+      } else {
+        currentWheel -= 1
+      }
+      return {
+        ...state,
+        wheelState: state.wheelState.map(item => {
+          if (currentWheel === item.wheelIndex) {
+            return {
+              ...item,
+              cogState: "cog active",
+              wheelValue: "B"
             }
-          }),
-          activeWheel: currentWheel
-        }
+          } else {
+            return {
+              ...item,
+              cogState: "cog",
+              wheelValue: ""
+            }
+          }
+        }),
+        activeWheel: currentWheel
+      }
+    default:
+      return state
+  }
+}
+//wheel functionality done
+
+const initialQuizState = {
+  quiz: "",
+  isFetching: false,
+  error: "",
+}
+function quiz(state = initialQuizState, action) {
+  switch (action.type) {
+    case SET_IS_FETCHING: 
+    return {
+      ...state,
+      isFetching: action.payload
+    }
+    case SET_QUIZ_INTO_STATE:
+      return {...state,
+        quiz: action.payload,
+      isFetching: true,
+      error: ""
+      }
+    case SET_ERROR: 
+    return {
+      ...state,
+      isFetching: true,
+      error: action.payload
+    }
+    case SET_SELECTED_ANSWER:
+      return {}
     default:
       return state
   }
 }
 
-
-const initialQuizState = null
-function quiz(state = initialQuizState, action) {
-  return state
+const initialSelectedAnswerState = {
+  selectedAnswer: null,
 }
-
-const initialSelectedAnswerState = null
 function selectedAnswer(state = initialSelectedAnswerState, action) {
   return state
 }
 
-const initialMessageState = ''
+const initialMessageState = {
+  infoMessage: ""
+}
 function infoMessage(state = initialMessageState, action) {
   return state
 }
