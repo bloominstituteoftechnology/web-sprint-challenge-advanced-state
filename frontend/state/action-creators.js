@@ -9,7 +9,7 @@ import {
   RESET_FORM,
   SET_IS_FETCHING,
   SET_ERROR,
-  RESET_SELECTED_STATE
+  RESET_SELECTED_STATE,
 }
   from './action-types'
 import axios from 'axios'
@@ -36,9 +36,18 @@ export function setMessage(message) {
 
 export function setQuiz() { }
 
-export function inputChange() { }
+export const inputChange = (data) => {
+  return {
+    type: INPUT_CHANGE, payload: data
+  }
+ }
 
-export function resetForm() { }
+
+export function resetForm() {
+  return {
+    type: RESET_FORM
+  }
+ }
 
 // ❗ Async action creators
 export const fetchQuiz = () => dispatch => {
@@ -85,28 +94,26 @@ export const postAnswer = (data) => dispatch => {
   // - Dispatch the fetching of the next quiz 
   const answer_id = data.answers.filter((elem) => elem.selectValue === "SELECTED")[0].answer_id
   axios.post(`http://localhost:9000/api/quiz/answer`, {"quiz_id": data.quiz_id, "answer_id": answer_id}).then(res => {
-    console.log(res)
     dispatch(setMessage(res.data.message))
     dispatch(resetSelectedState());
     dispatch(fetchQuiz())
   })
 }
-export function postQuiz() {
-  return function (dispatch) {
+export const postQuiz = (question, rightAnswer, wrongAnswer) => dispatch => {
+
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
 
 
-    // axios.post(`http://localhost:9000/api/quiz/new`, {
-    //   "question_text": data.question, "true_answer_text": data.answers[0].answer_id,
-    //   "false_answer_text": data.answers[1].answer_id
-    // }).then(res => {
-    //   console.log(res)
-    //   dispatch(resetSelectedState());
-    // })
+    axios.post(`http://localhost:9000/api/quiz/new`, {
+      "question_text": question, "true_answer_text": rightAnswer,
+      "false_answer_text": wrongAnswer
+    }).then(res => {
+      console.log(res)
+    })
 
 
-  }
+
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state
