@@ -1,6 +1,5 @@
 // ❗ You don't need to add extra reducers to achieve MVP
 import { combineReducers } from 'redux'
-import axios from 'axios';
 
 import {
   MOVE_CLOCKWISE,
@@ -11,7 +10,8 @@ import {
   INPUT_CHANGE,
   RESET_FORM,
   SET_IS_FETCHING,
-  SET_ERROR
+  SET_ERROR,
+  RESET_SELECTED_STATE
 }
   from './action-types'
 //wheel functionality done
@@ -108,42 +108,68 @@ const initialQuizState = {
   quiz: "",
   isFetching: false,
   error: "",
+  buttonState: true,
+  infoMessage: ""
 }
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
-    case SET_IS_FETCHING: 
-    return {
-      ...state,
-      isFetching: action.payload
-    }
-    case SET_QUIZ_INTO_STATE:
-      return {...state,
-        quiz: {...action.payload,
-        answers: action.payload.answers.map((element) => {
-          return {...element, selectValue: "Select", answerHighlight: false}
-        })},
-      isFetching: true,
-      error: ""
+    case SET_IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.payload
       }
-    case SET_ERROR: 
-    return {
-      ...state,
-      isFetching: true,
-      error: action.payload
-    }
+    case SET_QUIZ_INTO_STATE:
+      return {
+        ...state,
+        quiz: {
+          ...action.payload,
+          answers: action.payload.answers.map((element) => {
+            return { ...element, selectValue: "Select", answerHighlight: false }
+          })
+        },
+        isFetching: true,
+        error: "",
+        buttonState: true
+      }
+    case SET_ERROR:
+      return {
+        ...state,
+        isFetching: true,
+        error: action.payload
+      }
     case SET_SELECTED_ANSWER:
       return {
         ...state,
-        quiz: {...state.quiz, answers: state.quiz.answers.map(element => {
-          if(action.payload === element.answer_id){
-            return {...element, selectValue: "SELECTED", answerHighlight: true}
-          } else {
-            return {...element, selectValue: "Select", answerHighlight: false}
-          }
-        })},
+        quiz: {
+          ...state.quiz, answers: state.quiz.answers.map(element => {
+            if (action.payload === element.answer_id) {
+              return { ...element, selectValue: "SELECTED", answerHighlight: true }
+            } else {
+              return { ...element, selectValue: "Select", answerHighlight: false }
+            }
+          })
+        },
         selectValue: state.quiz.answers.selectValue,
         isFetching: true,
         error: "",
+        buttonState: false,
+        infoMessage: ""
+      }
+    case RESET_SELECTED_STATE:
+      return {
+        ...state,
+        quiz: {
+          ...state.quiz,
+          answers: state.quiz.answers.map(element => {
+            return { ...element, selectValue: "Select", answerHighlight: false }
+          })
+        },
+        buttonState: true
+      }
+    case SET_INFO_MESSAGE:
+      return {
+        ...state,
+        infoMessage: action.payload
       }
     default:
       return state
@@ -157,12 +183,21 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   return state
 }
 
-const initialMessageState = {
-  infoMessage: ""
-}
-function infoMessage(state = initialMessageState, action) {
-  return state
-}
+// const initialMessageState = {
+//   infoMessage: ""
+// }
+// function infoMessage(state = initialMessageState, action) {
+//   switch(action.type){
+//     case SET_INFO_MESSAGE:
+//       return {
+//         ...state,
+//         infoMessage: action.payload
+//       }
+//     case CLEAR_MESSAGE
+//     default:
+//       return state
+//   }
+// }
 
 const initialFormState = {
   newQuestion: '',
@@ -173,4 +208,4 @@ function form(state = initialFormState, action) {
   return state
 }
 
-export default combineReducers({ wheel, quiz, selectedAnswer, infoMessage, form })
+export default combineReducers({ wheel, quiz, selectedAnswer, form })
