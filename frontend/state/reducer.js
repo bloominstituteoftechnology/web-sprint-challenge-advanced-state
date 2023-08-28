@@ -11,7 +11,7 @@ import {
   RESET_FORM,
   SET_IS_FETCHING,
   SET_ERROR,
-  RESET_SELECTED_STATE
+  RESET_SELECTED_STATE,
 }
   from './action-types'
 //wheel functionality done
@@ -176,12 +176,12 @@ function quiz(state = initialQuizState, action) {
   }
 }
 
-const initialSelectedAnswerState = {
-  selectedAnswer: null,
-}
-function selectedAnswer(state = initialSelectedAnswerState, action) {
-  return state
-}
+// const initialSelectedAnswerState = {
+//   selectedAnswer: null,
+// }
+// function selectedAnswer(state = initialSelectedAnswerState, action) {
+//   return state
+// }
 
 // const initialMessageState = {
 //   infoMessage: ""
@@ -208,4 +208,4 @@ function form(state = initialFormState, action) {
   return state
 }
 
-export default combineReducers({ wheel, quiz, selectedAnswer, form })
+export default combineReducers({ wheel, quiz, form })

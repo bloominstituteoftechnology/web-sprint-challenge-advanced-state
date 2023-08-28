@@ -78,19 +78,18 @@ const resetSelectedState = () => {
   }
 }
 
-
 export const postAnswer = (data) => dispatch => {
   // On successful POST:
   // - Dispatch an action to reset the selected answer state
   // - Dispatch an action to set the server message to state
-  // - Dispatch the fetching of the next quiz
+  // - Dispatch the fetching of the next quiz 
   const answer_id = data.answers.filter((elem) => elem.selectValue === "SELECTED")[0].answer_id
   axios.post(`http://localhost:9000/api/quiz/answer`, {"quiz_id": data.quiz_id, "answer_id": answer_id}).then(res => {
     console.log(res)
     dispatch(setMessage(res.data.message))
     dispatch(resetSelectedState());
+    dispatch(fetchQuiz())
   })
-
 }
 export function postQuiz() {
   return function (dispatch) {
