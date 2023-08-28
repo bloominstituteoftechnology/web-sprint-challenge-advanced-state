@@ -108,6 +108,7 @@ const initialQuizState = {
   quiz: "",
   isFetching: false,
   error: "",
+  selectValue: "Select"
 }
 function quiz(state = initialQuizState, action) {
   switch (action.type) {

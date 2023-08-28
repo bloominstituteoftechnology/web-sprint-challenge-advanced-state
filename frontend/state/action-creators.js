@@ -42,7 +42,10 @@ export const fetchQuiz = () => dispatch => {
     // - Dispatch an action to send the obtained quiz to its state
     axios.get(`http://localhost:9000/api/quiz/next`)
     .then(res => {
-      dispatch()
+      console.log(res.data)
+      dispatch(setQuizIntoState(res.data))
+    }, (error) => {
+      dispatch(setError(error.message))
     })
 }
 
@@ -58,7 +61,7 @@ const setError = (error) => {
   }
 }
 
-const fetchingDataSuccess = (data) => {
+const setQuizIntoState = (data) => {
   return {
     type: SET_QUIZ_INTO_STATE, payload: data
   }
