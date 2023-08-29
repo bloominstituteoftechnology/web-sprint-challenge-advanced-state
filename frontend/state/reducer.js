@@ -12,7 +12,7 @@ import {
   SET_IS_FETCHING,
   SET_ERROR,
   RESET_SELECTED_STATE,
-  SUBMIT_BUTTON_STATE
+  CLEAR_INFO_MESSAGE
 }
   from './action-types'
 //wheel functionality done
@@ -110,7 +110,7 @@ const initialQuizState = {
   isFetching: false,
   error: "",
   buttonState: true,
-  infoMessage: ""
+  // infoMessage: ""
 }
 function quiz(state = initialQuizState, action) {
   switch (action.type) {
@@ -167,31 +167,31 @@ function quiz(state = initialQuizState, action) {
         },
         buttonState: true
       }
-    case SET_INFO_MESSAGE:
-      return {
-        ...state,
-        infoMessage: action.payload
-      }
+    // case SET_INFO_MESSAGE:
+    //   return {
+    //     ...state,
+    //     infoMessage: action.payload
+    //   }
     default:
       return state
   }
 }
 
-// const initialMessageState = {
-//   infoMessage: ""
-// }
-// function infoMessage(state = initialMessageState, action) {
-//   switch(action.type){
-//     case SET_INFO_MESSAGE:
-//       return {
-//         ...state,
-//         infoMessage: action.payload
-//       }
-//     case CLEAR_MESSAGE
-//     default:
-//       return state
-//   }
-// }
+const initialMessageState = {
+  infoMessage: ""
+}
+function infoMessage(state = initialMessageState, action) {
+  switch(action.type){
+    case SET_INFO_MESSAGE:
+      return {
+        infoMessage: action.payload
+      }
+    case CLEAR_INFO_MESSAGE:
+      return (state = initialMessageState)
+    default:
+      return state
+  }
+}
 
 const initialFormState = {
   newQuestion: '',
@@ -207,12 +207,10 @@ function form(state = initialFormState, action) {
         [evt.target.id]: evt.target.value
       }
     case RESET_FORM:
-      return {
-        ...initialFormState
-      }
+      return (state = initialFormState)
     default:
       return state
   }
 }
 
-export default combineReducers({ wheel, quiz, form })
+export default combineReducers({ wheel, quiz, form, infoMessage })

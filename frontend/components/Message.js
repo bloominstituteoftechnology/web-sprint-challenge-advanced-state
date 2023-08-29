@@ -7,7 +7,7 @@ const Message = (props) => {
 
 const mapStateToProps = state => {
   return {
-    infoMessage: state.quiz.infoMessage
+    infoMessage: state.infoMessage.infoMessage
   }
 }
 

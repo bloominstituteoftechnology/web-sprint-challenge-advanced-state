@@ -10,6 +10,7 @@ import {
   SET_IS_FETCHING,
   SET_ERROR,
   RESET_SELECTED_STATE,
+  CLEAR_INFO_MESSAGE
 }
   from './action-types'
 import axios from 'axios'
@@ -28,7 +29,7 @@ export function selectAnswer(id) {
   return { type: SET_SELECTED_ANSWER, payload: id }
 }
 
-export function setMessage(message) { 
+export function setMessage(message) {
   return {
     type: SET_INFO_MESSAGE, payload: message
   }
@@ -40,14 +41,14 @@ export const inputChange = (data) => {
   return {
     type: INPUT_CHANGE, payload: data
   }
- }
+}
 
 
 export function resetForm() {
   return {
     type: RESET_FORM
   }
- }
+}
 
 // ❗ Async action creators
 export const fetchQuiz = () => dispatch => {
@@ -93,27 +94,25 @@ export const postAnswer = (data) => dispatch => {
   // - Dispatch an action to set the server message to state
   // - Dispatch the fetching of the next quiz 
   const answer_id = data.answers.filter((elem) => elem.selectValue === "SELECTED")[0].answer_id
-  axios.post(`http://localhost:9000/api/quiz/answer`, {"quiz_id": data.quiz_id, "answer_id": answer_id}).then(res => {
+  axios.post(`http://localhost:9000/api/quiz/answer`, { "quiz_id": data.quiz_id, "answer_id": answer_id }).then(res => {
     dispatch(setMessage(res.data.message))
     dispatch(resetSelectedState());
     dispatch(fetchQuiz())
   })
 }
-export const postQuiz = (question, rightAnswer, wrongAnswer) => dispatch => {
+export const postQuiz = (question, rightAnswer, wrongAnswer, message) => dispatch => {
 
-    // On successful POST:
-    // - Dispatch the correct message to the the appropriate state
-    // - Dispatch the resetting of the form
-
-
-    axios.post(`http://localhost:9000/api/quiz/new`, {
-      "question_text": question, "true_answer_text": rightAnswer,
-      "false_answer_text": wrongAnswer
-    }).then(res => {
-      console.log(res)
-    })
-
-
-
+  // On successful POST:
+  // - Dispatch the correct message to the the appropriate state
+  // - Dispatch the resetting of the form
+  axios.post(`http://localhost:9000/api/quiz/new`, {
+    "question_text": question, "true_answer_text": rightAnswer,
+    "false_answer_text": wrongAnswer
+  }).then(res => {
+    console.log(res)
+    dispatch(setMessage(message))
+  }).catch(err => {
+    dispatch(setError(err))
+  })
 }
 // ❗ On promise rejections, use log statements or breakpoints, and put an appropriate error message in state

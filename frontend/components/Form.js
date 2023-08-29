@@ -10,8 +10,8 @@ export function Form(props) {
 
   const onSubmit = evt => {
     evt.preventDefault();
-    props.postQuiz(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer)
-    props.setMessage(`Congrats: "${props.newQuestion}" is a great question!`)
+    let message = `Congrats: "${props.newQuestion}" is a great question!`
+    props.postQuiz(props.newQuestion, props.newTrueAnswer, props.newFalseAnswer, message)
     props.resetForm();
   }
 
@@ -21,7 +21,7 @@ export function Form(props) {
       <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" value={props.newQuestion} />
       <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" value={props.newTrueAnswer} />
       <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" value={props.newFalseAnswer} />
-      <button  onClick={(evt) => onSubmit(evt)} id="submitNewQuizBtn" disabled={props.newQuestion && props.newFalseAnswer && props.newTrueAnswer ? false : true}>Submit new quiz</button>
+      <button onClick={(evt) => onSubmit(evt)} id="submitNewQuizBtn" disabled={props.newQuestion.trim() && props.newFalseAnswer.trim() && props.newTrueAnswer.trim() ? false : true}>Submit new quiz</button>
     </form>
   )
 }
@@ -35,4 +35,4 @@ const mapStateToProps = state => {
 }
 
 
-export default connect(mapStateToProps, {inputChange, postQuiz, setMessage, resetForm})(Form)
+export default connect(mapStateToProps, { inputChange, postQuiz, setMessage, resetForm })(Form)
