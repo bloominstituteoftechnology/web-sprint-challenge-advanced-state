@@ -154,7 +154,6 @@ function quiz(state = initialQuizState, action) {
         isFetching: true,
         error: "",
         buttonState: false,
-        infoMessage: ""
       }
     case RESET_SELECTED_STATE:
       return {

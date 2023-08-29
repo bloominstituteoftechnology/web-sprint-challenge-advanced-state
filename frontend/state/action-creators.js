@@ -25,7 +25,7 @@ export function moveCounterClockwise() {
 }
 //wheel functionality finished
 
-export function selectAnswer(id) {
+export const selectAnswer = (id) => {
   return { type: SET_SELECTED_ANSWER, payload: id }
 }
 
