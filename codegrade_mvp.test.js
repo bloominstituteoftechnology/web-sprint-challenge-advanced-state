@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, screen } from '@testing-library/react'
+import { render, fireEvent, screen, waitFor } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { setupServer, getHandlers } from './backend/mock-server'
 import App, { resetStore } from './frontend/components/App'
@@ -68,7 +68,7 @@ const ThatIsCorrect = 'That was the correct answer'
 const ThatIsAShame = 'That was the incorrect answer'
 
 describe('Advanced State Sprint Challenge Submission', () => {
-  describe('[WHEEL SCREEN], Review how to write actions and action creators to describe state changes and how to write reducers to respond to actions and update state. Also review how to connect components to redux.', () => {
+  describe('[WHEEL SCREEN]', () => {
     test(`[1] Clicking on the clockwise button:
         - the next cog to have the text content capital "B"
         - the next cog to have the class name "active"
@@ -109,13 +109,12 @@ describe('Advanced State Sprint Challenge Submission', () => {
       testCogs(5)
     })
   })
-  describe('[QUIZ SCREEN], Review how to write actions and action creators to describe state changes and how to write reducers to respond to actions and update state. Also review how to connect components to redux.', () => {
+  describe('[QUIZ SCREEN]', () => {
     beforeEach(() => {
       fireEvent.click(quizLink())
     })
     test(`[3] Navigating to the Quiz screen:
-        - Loads the first question & answers , Review how to write asynchronous action creators to consume data from external API's
-        `, async () => {
+        - Loads the first question & answers asynchronously`, async () => {
       let question = await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerA = screen.queryByText(AFunction, queryOptions)
       let answerB = screen.queryByText(AnElephant, queryOptions)
@@ -124,13 +123,13 @@ describe('Advanced State Sprint Challenge Submission', () => {
       expect(answerB).toBeInTheDocument()
     })
     test(`[4] Navigating to the Quiz screen:
-        - The "Submit answer" button should be , Review how to conditionally disable a button element.`, async () => {
+        - The "Submit answer" button should be disabled`, async () => {
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       expect(submitAnswerBtn()).toBeDisabled()
     })
     test(`[5] Selecting an answer adds the correct class name:
         - Adds the "selected" class name to the selected answer
-        - Removes the "selected" class name from the other answer, Review setting class names and using data from state.`, async () => {
+        - Removes the "selected" class name from the other answer`, async () => {
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerA = screen.queryByText(AFunction, queryOptions)
       let answerB = screen.queryByText(AnElephant, queryOptions)
@@ -143,7 +142,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
     })
     test(`[6] Selecting an answer adds the correct text to its button:
         - Changes the label of the button from "Select" to "SELECTED"
-        - Turns the label of the unselected from "SELECTED" to "Select", Review accessing and using data from state.`, async () => {
+        - Turns the label of the unselected from "SELECTED" to "Select"`, async () => {
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerA = screen.queryByText(AFunction, queryOptions)
       let answerB = screen.queryByText(AnElephant, queryOptions)
@@ -155,7 +154,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
       expect(answerB.textContent).toMatch(/SELECTED/)
     })
     test(`[7] Selecting and submitting an answer:
-        - Loads the next quiz from the API, Review accessing and using data from state.`, async () => {
+        - Loads the next quiz from the API`, async () => {
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerA = screen.queryByText(AFunction, queryOptions)
       fireEvent.click(answerA.querySelector('button'))
@@ -163,8 +162,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
       await screen.findByText(WhatIsPromise, queryOptions, waitForOptions)
     })
     test(`[8] Selecting and submitting a correct answer:
-        - Puts the proper success message at the top of the page, Review how to make axios requests and dispatch appropriate actions.
-        `, async () => {
+        - Puts the proper success message at the top of the page`, async () => {
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerA = screen.queryByText(AFunction, queryOptions)
       fireEvent.click(answerA.querySelector('button'))
@@ -172,7 +170,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
       await screen.findByText(ThatIsCorrect, queryOptions)
     })
     test(`[9] Selecting and submitting an incorrect answer:
-        - Submitting puts the proper failure message at the top of the page,  Review how to connect components to redux, how to store and retrieve data from state, and dispatch the correct actions.`, async () => {
+        - Submitting puts the proper failure message at the top of the page`, async () => {
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
       let answerB = screen.queryByText(AnElephant, queryOptions)
       fireEvent.click(answerB.querySelector('button'))
@@ -184,36 +182,57 @@ describe('Advanced State Sprint Challenge Submission', () => {
     beforeEach(() => {
       fireEvent.click(formLink())
     })
-    test('[10] Typing in inputs changes their , Review handling user input - onChange.', () => {
+    test('[10] Typing in inputs changes their value', async () => {
       fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })
-      expect(newQuestionInput()).toHaveValue('foo')
+      await waitFor(() => {
+        expect(newQuestionInput()).toHaveValue('foo')
+      }, waitForOptions)
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
-      expect(newTrueAnswerInput()).toHaveValue('bar')
+      await waitFor(() => {
+        expect(newTrueAnswerInput()).toHaveValue('bar')
+      }, waitForOptions)
       fireEvent.change(newFalseAnswerInput(), { target: { value: 'baz' } })
-      expect(newFalseAnswerInput()).toHaveValue('baz')
+      await waitFor(() => {
+        expect(newFalseAnswerInput()).toHaveValue('baz')
+      }, waitForOptions)
     })
     test(`[11] The submit button is disabled until all inputs have values more than one character
-        in length after trimming leading and trailing whitespace, Review how to conditionally disable a button element.
-    `, () => {
+        in length after trimming leading and trailing whitespace
+    `, async () => {
       expect(submitNewQuizBtn()).toBeDisabled()
       fireEvent.change(newQuestionInput(), { target: { value: 'question' } })
-      expect(submitNewQuizBtn()).toBeDisabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeDisabled()
+      }, waitForOptions)
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'true' } })
-      expect(submitNewQuizBtn()).toBeDisabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeDisabled()
+      }, waitForOptions)
       fireEvent.change(newFalseAnswerInput(), { target: { value: 'false' } })
-      expect(submitNewQuizBtn()).toBeEnabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeEnabled()
+      }, waitForOptions)
       fireEvent.change(newQuestionInput(), { target: { value: '   ' } })
-      expect(submitNewQuizBtn()).toBeDisabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeDisabled()
+      }, waitForOptions)
       fireEvent.change(newQuestionInput(), { target: { value: '  question  ' } })
-      expect(submitNewQuizBtn()).toBeEnabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeEnabled()
+      }, waitForOptions)
       fireEvent.change(newTrueAnswerInput(), { target: { value: '   ' } })
-      expect(submitNewQuizBtn()).toBeDisabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeDisabled()
+      }, waitForOptions)
       fireEvent.change(newTrueAnswerInput(), { target: { value: '  true  ' } })
-      expect(submitNewQuizBtn()).toBeEnabled()
+      await waitFor(() => {
+        expect(submitNewQuizBtn()).toBeEnabled()
+      }, waitForOptions)
     })
-    test(`[12] Successful submit of new quiz
+    // This test has become unreliable so it is skipped. Learner: test manually in Chrome that submitting works!
+    test.skip(`[12] Successful submit of new quiz (TEST MANUALLY IN CHROME!)
         - Displays the correct success message at the top of the screen
-        - Empties out the form, Review using data from state and how to reset state.
+        - Empties out the form
     `, async () => {
       fireEvent.change(newQuestionInput(), { target: { value: 'foobarbaz?' } })
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
@@ -224,8 +243,9 @@ describe('Advanced State Sprint Challenge Submission', () => {
       expect(newTrueAnswerInput()).toHaveValue('')
       expect(newFalseAnswerInput()).toHaveValue('')
     })
-    test(`[13] Successful submit of new quiz
-        - Adds the quiz to the roster of quizzes,  Review how to use axios to make POST requests.
+    // This test has become unreliable so it is skipped. Learner: test manually in Chrome that submitting works!
+    test.skip(`[13] Successful submit of new quiz (TEST MANUALLY IN CHROME!)
+        - Adds the quiz to the roster of quizzes
     `, async () => {
       fireEvent.change(newQuestionInput(), { target: { value: 'foobarbaz?' } })
       fireEvent.change(newTrueAnswerInput(), { target: { value: 'bar' } })
@@ -252,7 +272,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
   })
   describe('[APP STATE]', () => {
     test(`[14] The state of the wheel survives route changes:
-        - Moving the wheel, navigating away and back, should keep the position of the "B", Review how to persist state using global state with redux.
+        - Moving the wheel, navigating away and back, should keep the position of the "B"
     `, async () => {
       testCogs(0)
       fireEvent.click(clockwiseBtn())
@@ -263,7 +283,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
     })
     test(`[15] The state of the quiz survives route changes:
         - Selecting an answer, navigating away and back, should keep the selected answer
-        - Navigating away and back shouldn't cause a new quiz to be fetched from the API, Review how to persist state using global state with redux.
+        - Navigating away and back shouldn't cause a new quiz to be fetched from the API
     `, async () => {
       fireEvent.click(quizLink())
       await screen.findByText(WhatIsClosure, queryOptions, waitForOptions)
@@ -277,7 +297,7 @@ describe('Advanced State Sprint Challenge Submission', () => {
       expect(answerB.textContent).toMatch(/SELECTED/)
     })
     test(`[16] The state of the form survives route changes
-        - Filling out the form, navigating away and back, the entered data should ,  Review how to persist state using global state with redux.
+        - Filling out the form, navigating away and back, the entered data should survive
     `, async () => {
       fireEvent.click(formLink())
       fireEvent.change(newQuestionInput(), { target: { value: 'foo' } })

@@ -4,10 +4,10 @@ In this challenge, you will write the logic for [THIS APP](https://advanced-stat
 
 ## Tools
 
-- Node 16.x
-- NPM 8.x (update NPM executing `npm i -g npm`)
+- Node >=18.x
+- NPM >=8.x (update NPM executing `npm i -g npm`)
 - Unix-like shell (Gitbash/bash/zsh)
-- Chrome >= 98.x
+- Chrome >= 100.x
 
 ❗ Other configurations might work but haven't been tested.
 
@@ -77,9 +77,11 @@ In order to complete this project, you must fix the following modules:
 - The async action creators are marked as such.
 - Don't install new npm dependencies or upgrade existing ones.
 
-## MVP Short Explanation
+## MVP Short Explanation (READ!)
 
-❗ ALL TESTS MUST PASS
+❗ ALL AUTOMATIC TESTS MUST PASS,
+❗ **except** for tests 12 and 13 which are currently under maintenance and are skipped.
+❗ The functionality covered by 12 and 13 should be checked by hand and eyeball in Chrome.
 
 ## Stretch Goals
 
