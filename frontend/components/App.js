@@ -21,7 +21,7 @@ export const resetStore = () => {
   store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 }
 resetStore()
-
+// console.log(store.getState())
 export default function App() {
   return (
     <Provider store={store}>
